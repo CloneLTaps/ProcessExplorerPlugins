@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PluginInterface">
+      <HintPath>..\..\ProcessExplorer\PluginInterface\bin\Release\netcoreapp3.1\PluginInterface.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

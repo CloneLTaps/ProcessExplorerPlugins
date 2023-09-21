@@ -14,6 +14,7 @@ namespace PngPlugin.components
                 return;
             }
 
+            FileFormatedLittleEndian = false;
             StartPoint = 0;
 
             Desc = new string[RowSize];

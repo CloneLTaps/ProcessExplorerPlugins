@@ -65,7 +65,6 @@ namespace PngPlugin.components
 
         public static bool IsValidChunkType(string[] asciiChunkType, int targetIndex)
         {
-            //Console.WriteLine("IsValidChunkType Length:" + asciiChunkType.Length + " str:" + string.Join(" ", asciiChunkType));
             if (asciiChunkType.Length != 4 && asciiChunkType.Length != 1) return false; // The type is always 4 bytes but 1 byte can be used as a check
             
             List<string> validChunkTypes = new List<string> { // List of valid PNG chunk types 
@@ -80,14 +79,9 @@ namespace PngPlugin.components
             {
                 string s = asciiChunkType[i];
 
-                //Console.WriteLine("s:" + s + " i:" + i + " HexLength:" + asciiChunkType.Length);
-
                 for (int j = validChunkTypes.Count - 1; j >= 0; j--)
                 {
                     string[] strArray = validChunkTypes[j].Select(c => c.ToString()).ToArray();
-
-                   /* Console.WriteLine("i:" + i + " j:" + j + " CurrentStr:" + s + " StrArrayIndex:" + strArray[i] + " ListsStr:" + validChunkTypes[j]
-                        + " StrArrayLength:" + strArray.Length + " TargetIndex:" + targetIndex);*/
 
                     if (asciiChunkType.Length > strArray.Length) return false;
 
@@ -100,7 +94,6 @@ namespace PngPlugin.components
                     else validChunkTypes.RemoveAt(j);
                 }
 
-                //Console.WriteLine("Found:" + found + " Count:" + validChunkTypes.Count + " s:" + s);
                 if (found == false) return false;
             }
             return found;

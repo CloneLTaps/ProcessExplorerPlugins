@@ -34,10 +34,6 @@ namespace PngPlugin
             MyTreeNode headerNode = new MyTreeNode("Png Header");
             MyTreeNode.Children.Add(headerNode);
 
-            string[] str = "p".Select(c => c.ToString()).ToArray(); //"pHYs"
-
-            Console.WriteLine("IS VALID:" + ChunkHeader.IsValidChunkType(str, 0));
-
             componentMap.Add(pngHeader.Component, pngHeader);
             AssignSectionHeaders(pngHeader.EndPoint, 0, data);
 
@@ -106,8 +102,6 @@ namespace PngPlugin
                             }
 
                             ++headerNameCount;
-/*                            Console.WriteLine("VALID Start:" + startPoint + " SectionCount:" + sectionCount + " Ascii:" + ascii + " Char:" + asciiChar + " Row:" + row + " j:" + j
-                                + " CurrentOffset:" + currentOffset + " Invalid:" + (asciiChar == ' '));*/
                         }
                         else if (++headerNameCount < 4) // The Signature field in chunk headers are 8 bytes long but only the first 4 bytes must contain valid ASCII
                         {
@@ -117,9 +111,6 @@ namespace PngPlugin
                                 ascii = "";
                                 continue;
                             }
-
-/*                            Console.WriteLine("AsciiChar:" + asciiChar + " Ascii:" + ascii + " HeaderCount:" + headerNameCount + " Offset:" + currentOffset 
-                                + " StartPoint:" + startPoint + " Row:" + row + " j:" + j + " StartingIndex:" + startingIndex + " SkipAmount:" + initialSkipAmount);*/
                         }
                         else
                         {   // This means we must be at the 4th byte which always should be null terminating if its a valid section header name
@@ -136,9 +127,6 @@ namespace PngPlugin
 
                             ChunkHeader header = new ChunkHeader(dataStorage, currentOffset - 8, sectionType);
                             ChunkBody body = new ChunkBody(header.bodyStartPoint, header.bodyEndPoint, sectionBodyType);
-
-/*                            Console.WriteLine("VALID SECTION Ascii:" + ascii + " SectionCount:" + sectionCount + " StartPoint:" + header.StartPoint +
-                                " EndPoint:" + header.EndPoint + " End:" + header.End + " \n");*/
 
                             if (componentMap.ContainsKey(sectionType)) componentMap[sectionType] = header;
                             else componentMap.Add(sectionType, header);
